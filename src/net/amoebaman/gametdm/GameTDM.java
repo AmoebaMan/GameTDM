@@ -2,7 +2,12 @@ package net.amoebaman.gametdm;
 
 import java.util.List;
 
-import net.amoebaman.gamemaster.api.TeamAutoGame;
+import net.amoebaman.gamemaster.*;
+import net.amoebaman.gamemaster.api.*;
+import net.amoebaman.gamemaster.enums.*;
+import net.amoebaman.gamemaster.modules.*;
+import net.amoebaman.gamemaster.utils.*;
+import net.amoebaman.gamemaster.utils.ChatUtils.ColorScheme;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
