@@ -6,8 +6,9 @@ import net.amoebaman.gamemaster.*;
 import net.amoebaman.gamemaster.api.*;
 import net.amoebaman.gamemaster.enums.*;
 import net.amoebaman.gamemaster.modules.*;
-import net.amoebaman.gamemaster.utils.*;
-import net.amoebaman.gamemaster.utils.ChatUtils.ColorScheme;
+import net.amoebaman.utils.ChatUtils;
+import net.amoebaman.utils.ChatUtils.ColorScheme;
+import net.amoebaman.utils.CommandController;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
