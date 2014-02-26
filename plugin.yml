@@ -1,0 +1,17 @@
+main: net.amoebaman.gametdm.GameTDM
+
+name: GameTDM
+version: 1.0
+author: AmoebaMan
+description: Team Deathmatch on a GameMaster hook
+depend: [GameMaster]
+commands:
+  tdm:
+    description: Root for all event commands
+    permission: tdm.admin
+
+permissions:
+  tdm.*:
+    children:
+      tdm.admin: true
+      tdm.mapeditor: true
