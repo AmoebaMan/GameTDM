@@ -73,6 +73,11 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 	// the spawn point for the player's team, defined by the map.
 	public Location getRespawnLoc(Player player) { return Simple.getRespawnLoc(player, this); }
 	
+	// We also need to specify a location that the SafeSpawnModule uses for applying spawn
+	// invulnerability.  Some games might want to respawn the player outside of their traditional
+	// spawn location without actually giving them protection.
+	public Location getSafeLoc(Player player){ return getRespawnLoc(player); }
+	
 	// This is the time period in seconds after the player respawns when they will be fully
 	// invulnerable to any damage whatsoever.  GameMaster uses Minecraft's built-in no-damage-ticks
 	// function for this, which is basically impossible for anything to override.
