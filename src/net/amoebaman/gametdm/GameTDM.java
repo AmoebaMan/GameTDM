@@ -2,14 +2,6 @@ package net.amoebaman.gametdm;
 
 import java.util.List;
 
-import net.amoebaman.gamemaster.*;
-import net.amoebaman.gamemaster.api.*;
-import net.amoebaman.gamemaster.enums.*;
-import net.amoebaman.gamemaster.modules.*;
-import net.amoebaman.utils.ChatUtils;
-import net.amoebaman.utils.ChatUtils.ColorScheme;
-import net.amoebaman.utils.CommandController;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,6 +10,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
+import net.amoebaman.gamemaster.GameMaster;
+import net.amoebaman.gamemaster.api.GameMap;
+import net.amoebaman.gamemaster.api.Simple;
+import net.amoebaman.gamemaster.api.TeamAutoGame;
+import net.amoebaman.gamemaster.enums.PlayerStatus;
+import net.amoebaman.gamemaster.enums.Team;
+import net.amoebaman.gamemaster.modules.RespawnModule;
+import net.amoebaman.gamemaster.modules.TimerModule;
+import net.amoebaman.utils.CommandController;
+import net.amoebaman.utils.GenUtil;
+import net.amoebaman.utils.chat.JsonMessage;
+import net.amoebaman.utils.chat.Scheme;
 
 
 // This is a simple Team-Deathmatch gametype, to illustrate how the GameMaster API can be used
@@ -171,7 +175,13 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 				return;
 			setScore(team, getScore(team) + 1);
 			if(getScore(team) % 5 == 0)
-				Bukkit.broadcastMessage(ChatUtils.format("The " + team.chat + team + "]] team has [[" + getScore(team) + "]] points", ColorScheme.HIGHLIGHT));
+				new JsonMessage(Scheme.HIGHLIGHT)
+					.then("The ")
+					.then(team).color(team.chat).style(ChatColor.BOLD).tooltip(GenUtil.concat(GenUtil.playersToNames(getPlayers(team)), ChatColor.GRAY.toString(), "\\n" + ChatColor.GRAY, ""))
+					.then(" team has ")
+					.then(getScore(team)).strong()
+					.then(" points")
+					.broadcast();
 		}
 	}
 	
