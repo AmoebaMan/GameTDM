@@ -53,7 +53,7 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 	// more teams to be defined, with spawn points set for them.  As it happens, TeamAutoGame
 	// already checks this for us before consulting us, so there's nothing more we need
 	// to verify.
-	public boolean team_isCompatible(GameMap map) { return true; }
+	public boolean hasCompatibility(GameMap map) { return true; }
 	
 	// The RespawnModule will automatically send players to this location when they die, while
 	// they wait to respawn.  You should make this the location to some kind of lobby, or
@@ -66,7 +66,7 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 	// This is the time in seconds that it should take a player to respawn.  Note that you don't
 	// necessarily have to return just a number - you could return a different value based on which
 	// team the player is on, whether their team is in the lead, etc.
-	public int getRespawnSeconds(Player player) { return 5; }
+	public int getRespawnDelay(Player player) { return 5; }
 	
 	// This is the location that the player will respawn to after the waiting time has fully
 	// elapsed.  GameMaster's provides a Simple method for doing this, which will simply return
@@ -81,18 +81,18 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 	// This is the time period in seconds after the player respawns when they will be fully
 	// invulnerable to any damage whatsoever.  GameMaster uses Minecraft's built-in no-damage-ticks
 	// function for this, which is basically impossible for anything to override.
-	public int getRespawnInvulnSeconds(Player player) { return 5; }
+	public int getRespawnInvuln(Player player) { return 5; }
 	
 	// TeamAutoGame automatically implements the SafeSpawnModule, which protects players that are
 	// inside their spawns.  The location of their spawn is the same location given for respawning,
 	// taken from the method above.  This is the radius of the spawn, spherical, within which
 	// spawn protection is active.
-	public int getSpawnRadius(Player player) { return 7; }
+	public int getSafeRadius(Player player) { return 7; }
 	
 	// Because spawns are protected, GameMaster asks you for this to prevent people from running and
 	// hiding from spawn immediately after combat.  If a player tries to re-enter spawn too soon after
 	// being damaged by an enemy, they'll be slapped back out.
-	public int getSpawnReentryDelaySeconds(Player player) { return 5; }
+	public int getSafeReentryTimeout(Player player) { return 5; }
 	
 	// This returns the color that the player's name should be in the TAB list.  The Simple method
 	// for this just returns the player's team color.  This color is NOT the color over the player's
@@ -131,7 +131,7 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 	
 	// This gets the time limit of the game in minutes, used by the TimerModule.  After this many
 	// minutes have elapsed, the game will be ended by the GameMaster.
-	public int getGameLengthMinutes() { return 10; }
+	public int getGameLength() { return 10; }
 	
 	// This method is called to start the game, and perform any operations necessary for doing so.
 	// All the simple method does is set all teams' scores to zero, assign all players to a team,
