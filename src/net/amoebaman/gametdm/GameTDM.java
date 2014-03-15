@@ -20,7 +20,8 @@ import net.amoebaman.gamemaster.modules.RespawnModule;
 import net.amoebaman.gamemaster.modules.TimerModule;
 import net.amoebaman.utils.CommandController;
 import net.amoebaman.utils.GenUtil;
-import net.amoebaman.utils.chat.JsonMessage;
+import net.amoebaman.utils.chat.Chat;
+import net.amoebaman.utils.chat.Message;
 import net.amoebaman.utils.chat.Scheme;
 
 
@@ -111,7 +112,7 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 	//
 	// GameMaster automatically centers these messages, and formats them to the Highlight color
 	// scheme.  Check out the ChatUtils documentation for details.
-	public List<String> getStatus(Player player) { return Simple.getStatus(this); }
+	public List<?> getStatus(Player player) { return Simple.getStatus(this); }
 	
 	// This is called to add a player to the game, either at the very beginning of the game,
 	// or when they've just logged in.  The Simple method for this just finds the team with
@@ -175,9 +176,10 @@ public class GameTDM extends TeamAutoGame implements Listener, RespawnModule, Ti
 				return;
 			setScore(team, getScore(team) + 1);
 			if(getScore(team) % 5 == 0)
-				new JsonMessage(Scheme.HIGHLIGHT)
+				new Message(Scheme.HIGHLIGHT)
 					.then("The ")
-					.then(team).color(team.chat).style(ChatColor.BOLD).tooltip(GenUtil.concat(GenUtil.playersToNames(getPlayers(team)), ChatColor.GRAY.toString(), "\\n" + ChatColor.GRAY, ""))
+					.then(team).color(team.chat)
+						.tooltip(Chat.format("&zMembers:~" + GenUtil.concat(getPlayers(team), "&x  ", "~&x  ", ""), Scheme.NORMAL).split("~"))
 					.then(" team has ")
 					.then(getScore(team)).strong()
 					.then(" points")
