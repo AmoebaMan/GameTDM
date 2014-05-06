@@ -6,17 +6,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import net.amoebaman.amoebautils.CommandController;
+import net.amoebaman.amoebautils.AmoebaUtils;
+import net.amoebaman.amoebautils.chat.Chat;
+import net.amoebaman.amoebautils.chat.Message;
+import net.amoebaman.amoebautils.chat.Scheme;
 import net.amoebaman.gamemasterv3.api.TeamAutoGame;
 import net.amoebaman.gamemasterv3.enums.PlayerState;
 import net.amoebaman.gamemasterv3.enums.Team;
 import net.amoebaman.gamemasterv3.modules.RespawnModule;
 import net.amoebaman.gamemasterv3.modules.SafeSpawnModule;
 import net.amoebaman.gamemasterv3.modules.TimerModule;
-import net.amoebaman.utils.CommandController;
-import net.amoebaman.utils.GenUtil;
-import net.amoebaman.utils.chat.Chat;
-import net.amoebaman.utils.chat.Message;
-import net.amoebaman.utils.chat.Scheme;
 
 // This is a simple Team-Deathmatch gametype, to illustrate how the GameMaster API can be used
 // to create games quickly and simply, adding depth and intricacies only where needed.
@@ -89,7 +89,7 @@ public class GameTDM extends TeamAutoGame implements Listener, SafeSpawnModule, 
 					/*
 					 * Messages can do fancy JSON messaging stuff. :D
 					 */
-						.tooltip(Chat.format("&zMembers:~" + GenUtil.concat(getPlayers(team), "&x  ", "~&x  ", ""), Scheme.NORMAL).split("~"))
+						.tooltip(Chat.format("&zMembers:~" + AmoebaUtils.concat(getPlayers(team), "&x  ", "~&x  ", ""), Scheme.NORMAL).split("~"))
 					.then(" team has ")
 					.then(getScore(team)).strong()
 					.then(" points")
